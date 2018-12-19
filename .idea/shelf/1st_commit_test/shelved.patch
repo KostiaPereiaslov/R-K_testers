@@ -1,0 +1,347 @@
+Index: src/main/java/ApiTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import com.jayway.jsonpath.JsonPath;\nimport io.restassured.RestAssured;\nimport org.junit.Before;\nimport org.junit.Test;\n\nimport static io.restassured.RestAssured.when;\nimport static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;\nimport static org.hamcrest.Matchers.equalTo;\n\npublic class ApiTests {\n    String userToken = \"8acc6ecd71a1f13d80e4e1c9a913c2ce\";\n    int userGameID = 6275006;\n    String callUrl = \"api/events/status?token=\" + userToken + \"&game_account_id=\" + userGameID;\n\n    @Before\n    public void setup() {\n        RestAssured.baseURI = \"http://hov-uat-lo01.productmadness.com\";\n    }\n\n    @Test\n    public void statusCodeTest() {\n        when().get(callUrl).then().log().all().statusCode(200);\n\n\n    }\n\n    @Test\n    public void schemaValidationTest() {\n        when().get(callUrl).then().assertThat().body(matchesJsonSchemaInClasspath(\"event_status_schema.json\"));\n    }\n\n    @Test\n    public void fieldValueValidationTest () {\n        when().get(callUrl).then().assertThat().body(\"events[0].collections[1].collectibles[10].quantity\", equalTo(1));\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ApiTests.java	(revision 349e7b7b2219ae313dd1023555793a84e1676275)
++++ src/main/java/ApiTests.java	(date 1545233104000)
+@@ -35,3 +35,6 @@
+     }
+ 
+ }
++
++
++//branch test
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"b6df35a5-742e-4986-becf-121a6d1ae47f\" name=\"Default Changelist\" comment=\"1st commit\">\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/TestClass.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/TestClass.java\" afterDir=\"false\" />\n    </list>\n    <ignored path=\"$PROJECT_DIR$/out/\" />\n    <ignored path=\"$PROJECT_DIR$/target/\" />\n    <option name=\"EXCLUDED_CONVERTED_TO_IGNORED\" value=\"true\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileEditorManager\">\n    <leaf SIDE_TABS_SIZE_LIMIT_KEY=\"300\">\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/pom.xml\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"340\">\n              <caret line=\"26\" column=\"9\" selection-start-line=\"26\" selection-start-column=\"9\" selection-end-line=\"30\" selection-end-column=\"22\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/TestClass.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"136\">\n              <caret line=\"8\" selection-start-line=\"8\" selection-end-line=\"8\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/Init.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"272\">\n              <caret line=\"18\" column=\"44\" selection-start-line=\"18\" selection-start-column=\"44\" selection-end-line=\"18\" selection-end-column=\"44\" />\n              <folding>\n                <element signature=\"imports\" expanded=\"true\" />\n              </folding>\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file pinned=\"false\" current-in-tab=\"true\">\n        <entry file=\"file://$PROJECT_DIR$/src/main/java/ApiTests.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"374\">\n              <caret line=\"24\" column=\"5\" selection-start-line=\"24\" selection-start-column=\"5\" selection-end-line=\"24\" selection-end-column=\"5\" />\n              <folding>\n                <element signature=\"imports\" expanded=\"true\" />\n              </folding>\n            </state>\n          </provider>\n        </entry>\n      </file>\n    </leaf>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"IdeDocumentHistory\">\n    <option name=\"CHANGED_PATHS\">\n      <list>\n        <option value=\"$PROJECT_DIR$/src/main/java/Test.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Example.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/Init.java\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/ApiTests.java\" />\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\n        <option value=\"$PROJECT_DIR$/src/main/java/TestClass.java\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"MavenImportPreferences\">\n    <option name=\"importingSettings\">\n      <MavenImportingSettings>\n        <option name=\"importAutomatically\" value=\"true\" />\n      </MavenImportingSettings>\n    </option>\n  </component>\n  <component name=\"MavenProjectNavigator\">\n    <treeState>\n      <expand>\n        <path>\n          <item name=\"\" type=\"16c1761:MavenProjectsStructure$RootNode\" />\n          <item name=\"Romchik_Java\" type=\"9519ce18:MavenProjectsStructure$ProjectNode\" />\n        </path>\n        <path>\n          <item name=\"\" type=\"16c1761:MavenProjectsStructure$RootNode\" />\n          <item name=\"Romchik_Java\" type=\"9519ce18:MavenProjectsStructure$ProjectNode\" />\n          <item name=\"Dependencies\" type=\"f4be9f2a:MavenProjectsStructure$DependenciesNode\" />\n        </path>\n      </expand>\n      <select />\n    </treeState>\n  </component>\n  <component name=\"ProjectFrameBounds\" extendedState=\"6\">\n    <option name=\"x\" value=\"2085\" />\n    <option name=\"y\" value=\"-38\" />\n    <option name=\"width\" value=\"1750\" />\n    <option name=\"height\" value=\"980\" />\n  </component>\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectView\">\n    <navigator proportions=\"\" version=\"1\">\n      <foldersAlwaysOnTop value=\"true\" />\n    </navigator>\n    <panes>\n      <pane id=\"PackagesPane\" />\n      <pane id=\"Scope\" />\n      <pane id=\"ProjectPane\">\n        <subPane>\n          <expand>\n            <path>\n              <item name=\"Romchik_Java\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Romchik_Java\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"Romchik_Java\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Romchik_Java\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\".idea\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"Romchik_Java\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Romchik_Java\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"Romchik_Java\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Romchik_Java\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"main\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"Romchik_Java\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Romchik_Java\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"main\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"java\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"Romchik_Java\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Romchik_Java\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"test\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n          </expand>\n          <select />\n        </subPane>\n      </pane>\n    </panes>\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp\" value=\"1545219683597\" />\n    <property name=\"last_opened_file_path\" value=\"$USER_HOME$/projects/R-K_testers\" />\n    <property name=\"project.structure.last.edited\" value=\"Project\" />\n    <property name=\"project.structure.proportion\" value=\"0.0\" />\n    <property name=\"project.structure.side.proportion\" value=\"0.0\" />\n    <property name=\"vcs.patch.to.clipboard\" value=\"true\" />\n  </component>\n  <component name=\"RunDashboard\">\n    <option name=\"ruleStates\">\n      <list>\n        <RuleState>\n          <option name=\"name\" value=\"ConfigurationTypeDashboardGroupingRule\" />\n        </RuleState>\n        <RuleState>\n          <option name=\"name\" value=\"StatusDashboardGroupingRule\" />\n        </RuleState>\n      </list>\n    </option>\n  </component>\n  <component name=\"RunManager\" selected=\"JUnit.ApiTests.schemaValidationTest\">\n    <configuration name=\"ApiTests\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Romchik_Java\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"ApiTests\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"ApiTests.fieldValueValidationTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Romchik_Java\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"ApiTests\" />\n      <option name=\"METHOD_NAME\" value=\"fieldValueValidationTest\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"ApiTests.schemaValidation\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Romchik_Java\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"ApiTests\" />\n      <option name=\"METHOD_NAME\" value=\"schemaValidation\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"ApiTests.schemaValidationTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Romchik_Java\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"ApiTests\" />\n      <option name=\"METHOD_NAME\" value=\"schemaValidationTest\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"ApiTests.statusCodeTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"Romchik_Java\" />\n      <option name=\"PACKAGE_NAME\" value=\"\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"ApiTests\" />\n      <option name=\"METHOD_NAME\" value=\"statusCodeTest\" />\n      <option name=\"TEST_OBJECT\" value=\"method\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"JUnit.ApiTests.schemaValidationTest\" />\n        <item itemvalue=\"JUnit.ApiTests.statusCodeTest\" />\n        <item itemvalue=\"JUnit.ApiTests.fieldValueValidationTest\" />\n        <item itemvalue=\"JUnit.ApiTests\" />\n        <item itemvalue=\"JUnit.ApiTests.schemaValidation\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SvnConfiguration\">\n    <configuration />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"b6df35a5-742e-4986-becf-121a6d1ae47f\" name=\"Default Changelist\" comment=\"\" />\n      <created>1544701048941</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1544701048941</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"1st commit\">\n      <created>1545216164853</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1545216164853</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"TestHistory\">\n    <history-entry file=\"ApiTests_schemaValidation - 2018.12.14 at 13h 28m 18s.xml\">\n      <configuration name=\"ApiTests.schemaValidation\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests_schemaValidation - 2018.12.14 at 13h 29m 15s.xml\">\n      <configuration name=\"ApiTests.schemaValidation\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests_schemaValidation - 2018.12.14 at 13h 30m 46s.xml\">\n      <configuration name=\"ApiTests.schemaValidation\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests - 2018.12.14 at 13h 31m 19s.xml\">\n      <configuration name=\"ApiTests\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests_fieldValueValidationTest - 2018.12.14 at 16h 17m 27s.xml\">\n      <configuration name=\"ApiTests.fieldValueValidationTest\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests_fieldValueValidationTest - 2018.12.14 at 16h 17m 46s.xml\">\n      <configuration name=\"ApiTests.fieldValueValidationTest\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests_fieldValueValidationTest - 2018.12.14 at 16h 18m 47s.xml\">\n      <configuration name=\"ApiTests.fieldValueValidationTest\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests_fieldValueValidationTest - 2018.12.19 at 12h 48m 54s.xml\">\n      <configuration name=\"ApiTests.fieldValueValidationTest\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests_statusCodeTest - 2018.12.19 at 12h 49m 07s.xml\">\n      <configuration name=\"ApiTests.statusCodeTest\" configurationId=\"JUnit\" />\n    </history-entry>\n    <history-entry file=\"ApiTests_schemaValidationTest - 2018.12.19 at 12h 49m 14s.xml\">\n      <configuration name=\"ApiTests.schemaValidationTest\" configurationId=\"JUnit\" />\n    </history-entry>\n  </component>\n  <component name=\"ToolWindowManager\">\n    <frame x=\"1913\" y=\"-365\" width=\"2062\" height=\"1126\" extended-state=\"6\" />\n    <layout>\n      <window_info content_ui=\"combo\" id=\"Project\" order=\"0\" visible=\"true\" weight=\"0.1978022\" />\n      <window_info id=\"Structure\" order=\"1\" side_tool=\"true\" weight=\"0.25\" />\n      <window_info id=\"Image Layers\" order=\"2\" />\n      <window_info id=\"Designer\" order=\"3\" />\n      <window_info id=\"UI Designer\" order=\"4\" />\n      <window_info id=\"Capture Tool\" order=\"5\" />\n      <window_info id=\"Favorites\" order=\"6\" side_tool=\"true\" />\n      <window_info active=\"true\" anchor=\"bottom\" id=\"GitHub Pull Requests\" weight=\"0.32997987\" />\n      <window_info anchor=\"bottom\" id=\"Message\" order=\"0\" />\n      <window_info anchor=\"bottom\" id=\"Find\" order=\"1\" />\n      <window_info anchor=\"bottom\" id=\"Run\" order=\"2\" weight=\"0.32997987\" />\n      <window_info anchor=\"bottom\" id=\"Debug\" order=\"3\" weight=\"0.4\" />\n      <window_info anchor=\"bottom\" id=\"Cvs\" order=\"4\" weight=\"0.25\" />\n      <window_info anchor=\"bottom\" id=\"Inspection\" order=\"5\" weight=\"0.4\" />\n      <window_info anchor=\"bottom\" id=\"TODO\" order=\"6\" />\n      <window_info anchor=\"bottom\" id=\"Terminal\" order=\"7\" />\n      <window_info anchor=\"bottom\" id=\"Event Log\" order=\"8\" side_tool=\"true\" />\n      <window_info anchor=\"bottom\" id=\"Version Control\" order=\"9\" weight=\"0.32997987\" />\n      <window_info anchor=\"bottom\" id=\"Messages\" order=\"10\" weight=\"0.32997987\" />\n      <window_info anchor=\"right\" id=\"Commander\" internal_type=\"SLIDING\" order=\"0\" type=\"SLIDING\" weight=\"0.4\" />\n      <window_info anchor=\"right\" id=\"Ant Build\" order=\"1\" weight=\"0.24975026\" />\n      <window_info anchor=\"right\" content_ui=\"combo\" id=\"Hierarchy\" order=\"2\" weight=\"0.25\" />\n      <window_info anchor=\"right\" id=\"Palette\" order=\"3\" />\n      <window_info anchor=\"right\" id=\"Maven\" order=\"4\" weight=\"0.32967034\" />\n      <window_info anchor=\"right\" id=\"Theme Preview\" order=\"5\" />\n      <window_info anchor=\"right\" id=\"Capture Analysis\" order=\"6\" />\n      <window_info anchor=\"right\" id=\"Palette&#9;\" order=\"7\" />\n    </layout>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"1st commit\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"1st commit\" />\n  </component>\n  <component name=\"antWorkspaceConfiguration\">\n    <option name=\"IS_AUTOSCROLL_TO_SOURCE\" value=\"false\" />\n    <option name=\"FILTER_TARGETS\" value=\"false\" />\n  </component>\n  <component name=\"editorHistoryManager\">\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Example.java\" />\n    <entry file=\"file://$PROJECT_DIR$/src/main/resources/event_status_schema.json\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/Init.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"272\">\n          <caret line=\"18\" column=\"44\" selection-start-line=\"18\" selection-start-column=\"44\" selection-end-line=\"18\" selection-end-column=\"44\" />\n          <folding>\n            <element signature=\"imports\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/pom.xml\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"340\">\n          <caret line=\"26\" column=\"9\" selection-start-line=\"26\" selection-start-column=\"9\" selection-end-line=\"30\" selection-end-column=\"22\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/TestClass.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"136\">\n          <caret line=\"8\" selection-start-line=\"8\" selection-end-line=\"8\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/main/java/ApiTests.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"374\">\n          <caret line=\"24\" column=\"5\" selection-start-line=\"24\" selection-start-column=\"5\" selection-end-line=\"24\" selection-end-column=\"5\" />\n          <folding>\n            <element signature=\"imports\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n  </component>\n  <component name=\"masterDetails\">\n    <states>\n      <state key=\"ArtifactsStructureConfigurable.UI\">\n        <settings>\n          <artifact-editor />\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n      <state key=\"FacetStructureConfigurable.UI\">\n        <settings>\n          <last-edited>No facets are configured</last-edited>\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n      <state key=\"GlobalLibrariesConfigurable.UI\">\n        <settings>\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n      <state key=\"JdkListConfigurable.UI\">\n        <settings>\n          <last-edited>1.8</last-edited>\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n      <state key=\"ModuleStructureConfigurable.UI\">\n        <settings>\n          <last-edited>Romchik_Java</last-edited>\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n                <option value=\"0.6\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n      <state key=\"ProjectLibrariesConfigurable.UI\">\n        <settings>\n          <last-edited>Maven: com.beust:jcommander:1.27</last-edited>\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n    </states>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 349e7b7b2219ae313dd1023555793a84e1676275)
++++ .idea/workspace.xml	(date 1545233314000)
+@@ -2,7 +2,8 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="b6df35a5-742e-4986-becf-121a6d1ae47f" name="Default Changelist" comment="1st commit">
+-      <change beforePath="$PROJECT_DIR$/src/main/java/TestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TestClass.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ApiTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ApiTests.java" afterDir="false" />
+     </list>
+     <ignored path="$PROJECT_DIR$/out/" />
+     <ignored path="$PROJECT_DIR$/target/" />
+@@ -17,7 +18,7 @@
+       <file pinned="false" current-in-tab="false">
+         <entry file="file://$PROJECT_DIR$/pom.xml">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="340">
++            <state relative-caret-position="381">
+               <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="30" selection-end-column="22" />
+             </state>
+           </provider>
+@@ -26,7 +27,7 @@
+       <file pinned="false" current-in-tab="false">
+         <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="136">
++            <state relative-caret-position="120">
+               <caret line="8" selection-start-line="8" selection-end-line="8" />
+             </state>
+           </provider>
+@@ -35,7 +36,7 @@
+       <file pinned="false" current-in-tab="false">
+         <entry file="file://$PROJECT_DIR$/src/main/java/Init.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="272">
++            <state relative-caret-position="240">
+               <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+               <folding>
+                 <element signature="imports" expanded="true" />
+@@ -47,8 +48,8 @@
+       <file pinned="false" current-in-tab="true">
+         <entry file="file://$PROJECT_DIR$/src/main/java/ApiTests.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="374">
+-              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
++            <state relative-caret-position="555">
++              <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+               <folding>
+                 <element signature="imports" expanded="true" />
+               </folding>
+@@ -74,9 +75,9 @@
+         <option value="$PROJECT_DIR$/src/main/java/Test.java" />
+         <option value="$PROJECT_DIR$/src/main/java/Example.java" />
+         <option value="$PROJECT_DIR$/src/main/java/Init.java" />
+-        <option value="$PROJECT_DIR$/src/main/java/ApiTests.java" />
+         <option value="$PROJECT_DIR$/pom.xml" />
+         <option value="$PROJECT_DIR$/src/main/java/TestClass.java" />
++        <option value="$PROJECT_DIR$/src/main/java/ApiTests.java" />
+       </list>
+     </option>
+   </component>
+@@ -103,11 +104,11 @@
+       <select />
+     </treeState>
+   </component>
+-  <component name="ProjectFrameBounds" extendedState="6">
+-    <option name="x" value="2085" />
+-    <option name="y" value="-38" />
+-    <option name="width" value="1750" />
+-    <option name="height" value="980" />
++  <component name="ProjectFrameBounds">
++    <option name="x" value="61" />
++    <option name="y" value="78" />
++    <option name="width" value="1539" />
++    <option name="height" value="833" />
+   </component>
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="2" id="Add" />
+@@ -118,52 +119,41 @@
+     </navigator>
+     <panes>
+       <pane id="PackagesPane" />
+-      <pane id="Scope" />
+       <pane id="ProjectPane">
+         <subPane>
+           <expand>
+             <path>
+-              <item name="Romchik_Java" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Romchik_Java" type="462c0819:PsiDirectoryNode" />
+-            </path>
+-            <path>
+-              <item name="Romchik_Java" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Romchik_Java" type="462c0819:PsiDirectoryNode" />
+-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
++              <item name="R-K_testers" type="b2602c69:ProjectViewProjectNode" />
++              <item name="R-K_testers" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="Romchik_Java" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Romchik_Java" type="462c0819:PsiDirectoryNode" />
++              <item name="R-K_testers" type="b2602c69:ProjectViewProjectNode" />
++              <item name="R-K_testers" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="Romchik_Java" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Romchik_Java" type="462c0819:PsiDirectoryNode" />
++              <item name="R-K_testers" type="b2602c69:ProjectViewProjectNode" />
++              <item name="R-K_testers" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+               <item name="main" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+-              <item name="Romchik_Java" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Romchik_Java" type="462c0819:PsiDirectoryNode" />
++              <item name="R-K_testers" type="b2602c69:ProjectViewProjectNode" />
++              <item name="R-K_testers" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+               <item name="main" type="462c0819:PsiDirectoryNode" />
+               <item name="java" type="462c0819:PsiDirectoryNode" />
+-            </path>
+-            <path>
+-              <item name="Romchik_Java" type="b2602c69:ProjectViewProjectNode" />
+-              <item name="Romchik_Java" type="462c0819:PsiDirectoryNode" />
+-              <item name="src" type="462c0819:PsiDirectoryNode" />
+-              <item name="test" type="462c0819:PsiDirectoryNode" />
+             </path>
+           </expand>
+           <select />
+         </subPane>
+       </pane>
++      <pane id="Scope" />
+     </panes>
+   </component>
+   <component name="PropertiesComponent">
+-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545219683597" />
+-    <property name="last_opened_file_path" value="$USER_HOME$/projects/R-K_testers" />
++    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545233289547" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+     <property name="project.structure.last.edited" value="Project" />
+     <property name="project.structure.proportion" value="0.0" />
+     <property name="project.structure.side.proportion" value="0.0" />
+@@ -181,11 +171,15 @@
+       </list>
+     </option>
+   </component>
+-  <component name="RunManager" selected="JUnit.ApiTests.schemaValidationTest">
++  <component name="RunManager" selected="JUnit.ApiTests">
+     <configuration name="ApiTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="Romchik_Java" />
++      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
++      <option name="ALTERNATIVE_JRE_PATH" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home" />
+       <option name="PACKAGE_NAME" value="" />
+       <option name="MAIN_CLASS_NAME" value="ApiTests" />
++      <option name="METHOD_NAME" value="" />
++      <option name="PARAMETERS" value="" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+@@ -230,12 +224,19 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <list>
++      <item itemvalue="JUnit.ApiTests" />
++      <item itemvalue="JUnit.ApiTests.fieldValueValidationTest" />
++      <item itemvalue="JUnit.ApiTests.schemaValidation" />
++      <item itemvalue="JUnit.ApiTests.schemaValidationTest" />
++      <item itemvalue="JUnit.ApiTests.statusCodeTest" />
++    </list>
+     <recent_temporary>
+       <list>
++        <item itemvalue="JUnit.ApiTests" />
+         <item itemvalue="JUnit.ApiTests.schemaValidationTest" />
+         <item itemvalue="JUnit.ApiTests.statusCodeTest" />
+         <item itemvalue="JUnit.ApiTests.fieldValueValidationTest" />
+-        <item itemvalue="JUnit.ApiTests" />
+         <item itemvalue="JUnit.ApiTests.schemaValidation" />
+       </list>
+     </recent_temporary>
+@@ -262,64 +263,65 @@
+     <servers />
+   </component>
+   <component name="TestHistory">
+-    <history-entry file="ApiTests_schemaValidation - 2018.12.14 at 13h 28m 18s.xml">
+-      <configuration name="ApiTests.schemaValidation" configurationId="JUnit" />
++    <history-entry file="ApiTests_schemaValidationTest - 2018.12.19 at 16h 57m 44s.xml">
++      <configuration name="ApiTests.schemaValidationTest" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests_schemaValidation - 2018.12.14 at 13h 29m 15s.xml">
+-      <configuration name="ApiTests.schemaValidation" configurationId="JUnit" />
++    <history-entry file="ApiTests_schemaValidationTest - 2018.12.19 at 16h 59m 22s.xml">
++      <configuration name="ApiTests.schemaValidationTest" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests_schemaValidation - 2018.12.14 at 13h 30m 46s.xml">
+-      <configuration name="ApiTests.schemaValidation" configurationId="JUnit" />
++    <history-entry file="ApiTests - 2018.12.19 at 17h 01m 17s.xml">
++      <configuration name="ApiTests" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests - 2018.12.14 at 13h 31m 19s.xml">
++    <history-entry file="ApiTests - 2018.12.19 at 17h 02m 25s.xml">
+       <configuration name="ApiTests" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests_fieldValueValidationTest - 2018.12.14 at 16h 17m 27s.xml">
+-      <configuration name="ApiTests.fieldValueValidationTest" configurationId="JUnit" />
++    <history-entry file="ApiTests - 2018.12.19 at 17h 08m 15s.xml">
++      <configuration name="ApiTests" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests_fieldValueValidationTest - 2018.12.14 at 16h 17m 46s.xml">
+-      <configuration name="ApiTests.fieldValueValidationTest" configurationId="JUnit" />
++    <history-entry file="ApiTests - 2018.12.19 at 17h 09m 26s.xml">
++      <configuration name="ApiTests" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests_fieldValueValidationTest - 2018.12.14 at 16h 18m 47s.xml">
+-      <configuration name="ApiTests.fieldValueValidationTest" configurationId="JUnit" />
++    <history-entry file="ApiTests - 2018.12.19 at 17h 11m 03s.xml">
++      <configuration name="ApiTests" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests_fieldValueValidationTest - 2018.12.19 at 12h 48m 54s.xml">
+-      <configuration name="ApiTests.fieldValueValidationTest" configurationId="JUnit" />
++    <history-entry file="ApiTests - 2018.12.19 at 17h 15m 06s.xml">
++      <configuration name="ApiTests" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests_statusCodeTest - 2018.12.19 at 12h 49m 07s.xml">
+-      <configuration name="ApiTests.statusCodeTest" configurationId="JUnit" />
++    <history-entry file="ApiTests - 2018.12.19 at 17h 20m 41s.xml">
++      <configuration name="ApiTests" configurationId="JUnit" />
+     </history-entry>
+-    <history-entry file="ApiTests_schemaValidationTest - 2018.12.19 at 12h 49m 14s.xml">
+-      <configuration name="ApiTests.schemaValidationTest" configurationId="JUnit" />
++    <history-entry file="ApiTests - 2018.12.19 at 17h 22m 39s.xml">
++      <configuration name="ApiTests" configurationId="JUnit" />
+     </history-entry>
+   </component>
+   <component name="ToolWindowManager">
+-    <frame x="1913" y="-365" width="2062" height="1126" extended-state="6" />
++    <frame x="1989" y="157" width="1920" height="1033" extended-state="0" />
++    <editor active="true" />
+     <layout>
+-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1978022" />
++      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27103302" />
+       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+       <window_info id="Image Layers" order="2" />
+       <window_info id="Designer" order="3" />
+       <window_info id="UI Designer" order="4" />
+       <window_info id="Capture Tool" order="5" />
+       <window_info id="Favorites" order="6" side_tool="true" />
+-      <window_info active="true" anchor="bottom" id="GitHub Pull Requests" weight="0.32997987" />
+       <window_info anchor="bottom" id="Message" order="0" />
+       <window_info anchor="bottom" id="Find" order="1" />
+-      <window_info anchor="bottom" id="Run" order="2" weight="0.32997987" />
++      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4978701" visible="true" weight="0.26992562" />
+       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+       <window_info anchor="bottom" id="TODO" order="6" />
+-      <window_info anchor="bottom" id="Terminal" order="7" />
+-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32997987" />
+-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32997987" />
++      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49946752" weight="0.32943678" />
++      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5021299" side_tool="true" visible="true" weight="0.26992562" />
++      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49946752" weight="0.32943678" />
++      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49840257" weight="0.32837406" />
++      <window_info active="true" anchor="bottom" id="GitHub Pull Requests" order="11" weight="0.32997987" />
+       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+       <window_info anchor="right" id="Ant Build" order="1" weight="0.24975026" />
+       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+       <window_info anchor="right" id="Palette" order="3" />
+-      <window_info anchor="right" id="Maven" order="4" weight="0.32967034" />
++      <window_info anchor="right" id="Maven" order="4" visible="true" weight="0.11767838" />
+       <window_info anchor="right" id="Theme Preview" order="5" />
+       <window_info anchor="right" id="Capture Analysis" order="6" />
+       <window_info anchor="right" id="Palette&#9;" order="7" />
+@@ -338,34 +340,34 @@
+     <entry file="file://$PROJECT_DIR$/src/main/resources/event_status_schema.json">
+       <provider selected="true" editor-type-id="text-editor" />
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/main/java/Init.java">
++    <entry file="file://$PROJECT_DIR$/pom.xml">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="272">
+-          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+-          <folding>
+-            <element signature="imports" expanded="true" />
+-          </folding>
++        <state relative-caret-position="381">
++          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="30" selection-end-column="22" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/pom.xml">
++    <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="340">
+-          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="30" selection-end-column="22" />
++        <state relative-caret-position="120">
++          <caret line="8" selection-start-line="8" selection-end-line="8" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
++    <entry file="file://$PROJECT_DIR$/src/main/java/Init.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="136">
+-          <caret line="8" selection-start-line="8" selection-end-line="8" />
++        <state relative-caret-position="240">
++          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
+         </state>
+       </provider>
+     </entry>
+     <entry file="file://$PROJECT_DIR$/src/main/java/ApiTests.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="374">
+-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
++        <state relative-caret-position="555">
++          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+           <folding>
+             <element signature="imports" expanded="true" />
+           </folding>
